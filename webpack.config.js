@@ -13,9 +13,11 @@ module.exports = {
     filename: '[name].js'
   },
 
+  performance: { hints: !devMode }, // hide warnings
+
   mode: devMode ? 'production' : 'development',
 
-  devtool: devMode ? 'source-map' : false,
+  devtool: devMode ? 'eval' : false,
 
   module: {
     rules: [{
@@ -24,7 +26,10 @@ module.exports = {
         devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
         'css-loader',
         'sass-loader',
-      ]
+      ],
+      exclude: [
+        /node_modules/,
+      ],
     }, {
       test: /\.(png|jpg|gif)$/,
       use: [
@@ -35,7 +40,7 @@ module.exports = {
             outputPath: 'images/',
           }
         }
-      ]
+      ],
     }]
   },
 
@@ -44,6 +49,12 @@ module.exports = {
     new HtmlWebpackPlugin({ template: './src/index.html' }),
     new MiniCssExtractPlugin(),
   ],
+
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
 
 }
 
