@@ -10,9 +10,13 @@ class Slider {
    * users: array of user objects
    */
   constructor({ wrapper }) {
-
     this.wrapper = wrapper
-    this.duration = 800
+
+    // animation params
+    this.durationLoop = 4000
+    this.durationStop = 2500
+
+
     this.isAnimating = false
 
     // create users-list
@@ -147,7 +151,7 @@ class Slider {
     return anime({
       targets: el,
       translateY: [
-        { value: destination, duration: this.duration },
+        { value: destination, duration: this.durationLoop },
       ],
       easing: 'linear',
       // duration: 2000,
@@ -171,7 +175,7 @@ class Slider {
     this.animFinish = anime({
       targets,
       translateY: `+=${translateY}px`,
-      duration: this.duration * 4,
+      duration: this.durationStop,
       // easing: 'easeOutCirc',
       elasticity: 700,
       complete: () => {
