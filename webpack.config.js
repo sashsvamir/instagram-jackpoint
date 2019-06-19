@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 const devMode = process.env.NODE_ENV !== 'production'
+const mode = devMode ? 'development' : 'production'
 
 module.exports = {
   entry: './src/index.js',
@@ -15,7 +16,7 @@ module.exports = {
 
   performance: { hints: !devMode }, // hide warnings
 
-  mode: devMode ? 'production' : 'development',
+  mode: mode,
 
   devtool: devMode ? 'eval' : false,
 
